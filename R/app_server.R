@@ -11,7 +11,13 @@ app_server <- function(input, output, session) {
   # Can't get reticulate to place nicely with the SimPy installation in another folder
   # Instead, we'll create a lookup ? CSV and then run the command below
   # Once it has completed, we can retrieve the output
-  system("D:/conda/condabin/conda.bat activate base && D:/conda/condabin/conda.bat run D:/oneoneone/oneoneone-des.py", intern = T)
+
+  #system("D:/conda/condabin/conda.bat activate base && D:/conda/condabin/conda.bat run D:/oneoneone/oneoneone-des.py", intern = T)
+
+  # options(reticulate.conda_binary = "D:/conda/python.exe")
+  # options(reticulate.conda_binary = "D:/conda/condabin/conda.bat")
+  # reticulate::use_condaenv('base')
+  # reticulate::source_python('D:/oneoneone/oneoneone-des.py')
 
   mod_des_server("des_1")
 }

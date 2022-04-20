@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-  Shiny.addCustomMessageHandler('fun', function(arg) {
- 
+  Shiny.addCustomMessageHandler('testmessage', function(message) {
+    alert(JSON.stringify(message));
   })
 });

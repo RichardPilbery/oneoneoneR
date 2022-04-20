@@ -14,9 +14,12 @@ mod_des_ui <- function(id){
       shinydashboard::dashboardHeader(title="111 Demand modelling"),
       shinydashboard::dashboardSidebar(
         h2('Configuration', class = "sidebar-h2"),
-        sliderInput("num_runs", "Number of simualtion runs", 1, 10, 3, 1, TRUE),
-        sliderInput("warm_up_time", "Warm up time (hours)", 8, 24, 24, 1, TRUE),
-        sliderInput("pt_time_in_sim", "Patient time in simulation (hours)", 24, 96, 96, 2, TRUE),
+        # Note the ns() which is required when using modules
+        # Otherwise it does not prefix the module id to the id and doesn't work!
+        sliderInput(ns("num_runs"), "Number of simualtion runs", 1, 10, 3, 1, TRUE),
+        sliderInput(ns("warm_up_time"), "Warm up time (hours)", 8, 24, 24, 1, TRUE),
+        sliderInput(ns("pt_time_in_sim"), "Patient time in simulation (hours)", 24, 96, 96, 2, TRUE),
+        actionButton(ns('runsim'), 'Run Simulation'),
         collapsed = FALSE
       ),
       shinydashboard::dashboardBody(
@@ -44,7 +47,13 @@ mod_des_ui <- function(id){
 mod_des_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+    observeEvent(input$runsim, {
+      # options( "golem.app.prod" = FALSE)
+      # golem::cat_dev("Run the simulation")
 
+      session$sendCustomMessage(type = 'testmessage', message = list(input$num_runs, input$warm_up_time, input$pt_time_in_sim))
+      write_variables(input$num_runs, input$warm_up_time, input$pt_time_in_sim)
+    })
   })
 }
 

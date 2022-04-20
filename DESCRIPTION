@@ -9,7 +9,9 @@ URL: https://github.com/RichardPilbery/oneoneoneR
 BugReports: https://github.com/RichardPilbery/oneoneoneR/issues
 Imports: 
     config (>= 0.3.1),
+    glue,
     golem (>= 0.3.2),
+    reticulate,
     shiny (>= 1.7.1),
     shinydashboard
 Suggests: 
